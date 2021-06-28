@@ -1,0 +1,1 @@
+insert into User(sid, name) values (1, 'bone')

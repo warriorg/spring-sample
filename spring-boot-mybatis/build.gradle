@@ -1,0 +1,6 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter")
+    implementation("com.h2database:h2")
+}

@@ -1,0 +1,26 @@
+# 自定义属性
+kafka:
+  topic: spring-test
+  multiple-topic: one,two         # 不要有空格
+
+# 配置Kafka
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:   # 配置生产者
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+    consumer:   # 配置消费者
+      group-id: group0  # 消费者组
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+    listener:
+      ack-mode: manual_immediate
+      poll-timeout: 30000   # Consumer session 过期时间。这个值必须设置在broker configuration中的
+                            # group.min.session.timeout.ms 与 group.max.session.timeout.ms之间。
+
+logging:
+  level:
+    me.warriorg: debug

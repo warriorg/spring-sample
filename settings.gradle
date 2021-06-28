@@ -1,0 +1,6 @@
+rootProject.name = 'spring-sample'
+
+include 'spring-data-mongo'
+include 'spring-data-elasticsearch'
+include 'spring-datasource'
+include 'spring-boot-mybatis'
