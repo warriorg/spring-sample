@@ -1,6 +1,6 @@
-package me.warriorg.spring.mybatis.dao;
+package me.warriorg.spring.mybatis.mapper;
 
-import me.warriorg.spring.mybatis.domain.User;
+import me.warriorg.spring.mybatis.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

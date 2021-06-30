@@ -1,14 +1,14 @@
-package me.warriorg.spring.es.model;
+package me.warriorg.spring.jpa.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * @author warrior
  */
 @Data
-@Document("movies")
+@Document(indexName = "movies")
 public class Movie {
 
     @Id

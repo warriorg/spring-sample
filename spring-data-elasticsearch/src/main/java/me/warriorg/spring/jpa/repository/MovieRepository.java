@@ -1,6 +1,6 @@
-package me.warriorg.spring.es.repository;
+package me.warriorg.spring.jpa.repository;
 
-import me.warriorg.spring.es.model.Movie;
+import me.warriorg.spring.jpa.model.Movie;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

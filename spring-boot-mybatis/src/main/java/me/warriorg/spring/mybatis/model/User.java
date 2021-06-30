@@ -1,4 +1,4 @@
-package me.warriorg.spring.mybatis.domain;
+package me.warriorg.spring.mybatis.model;
 
 import lombok.Data;
 
