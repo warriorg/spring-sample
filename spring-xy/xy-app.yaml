@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xyapp
+spec:
+  selector:
+    matchLabels:
+      app: xyapp
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: xyapp
+    spec:
+      containers:
+        - name: xyapp
+          image: spring-xy-app
+          imagePullPolicy: Never    # use local image
+          ports:
+            - name: xyapp
+              containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: xyapp-service
+  labels:
+    app: xyapp
+spec:
+  type: LoadBalancer   # NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: xyapp
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: xyapp-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: xyapp-service
+                port:
+                  number: 8080

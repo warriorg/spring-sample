@@ -3,8 +3,7 @@ FROM openjdk:11.0.11-jdk-slim
 
 MAINTAINER warrior gao
 
-ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JAVA_OPTS="" \
+ENV JAVA_OPTS="" \
     PROFILES="default"
 
 ADD build/libs/*.jar /bookstore.jar
