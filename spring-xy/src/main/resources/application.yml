@@ -1,0 +1,4 @@
+mybatis:
+  type-handlers-package: me.warriorg.spring.mybatis.handler
+  configuration:
+    map-underscore-to-camel-case: true

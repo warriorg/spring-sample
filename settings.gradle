@@ -2,6 +2,7 @@ rootProject.name = 'spring-sample'
 
 include 'spring-data-jpa'
 include 'spring-data-mongo'
+include 'spring-data-redis'
 include 'spring-data-elasticsearch'
 include 'spring-datasource'
 include 'spring-boot-mybatis'

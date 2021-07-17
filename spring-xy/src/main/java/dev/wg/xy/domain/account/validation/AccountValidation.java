@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 public class AccountValidation <T extends Annotation> implements ConstraintValidator<T, Account> {
 
     @Autowired
-    protected AccountRepository repository;
+    protected AccountRepository accountRepository;
 
     protected Predicate<Account> predicate = c -> true;
 
@@ -23,18 +23,18 @@ public class AccountValidation <T extends Annotation> implements ConstraintValid
         // 正常途径是使用分组验证避免，但@Vaild不支持分组，@Validated支持，却又是Spring的私有标签
         // 另一个途径是设置Hibernate配置文件中的javax.persistence.validation.mode参数为“none”，这个参数在Spring的yml中未提供桥接
         // 为了避免涉及到数据库操作的验证重复进行，在这里做增加此空值判断，利用Hibernate验证时验证器不是被Spring创建的特点绕开
-        return repository == null || predicate.test(value);
+        return accountRepository == null || predicate.test(value);
     }
 
     public static class ExistsAccountValidator extends AccountValidation<ExistsAccount> {
         public void initialize(ExistsAccount constraintAnnotation) {
-            predicate = c -> repository.existsById(c.getId());
+            predicate = c -> accountRepository.existsById(c.getId());
         }
     }
 
     public static class UniqueAccountValidator extends AccountValidation<UniqueAccount> {
         public void initialize(UniqueAccount constraintAnnotation) {
-            predicate = c -> !repository.existsByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());
+            predicate = c -> !accountRepository.existsByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());
         }
     }
 

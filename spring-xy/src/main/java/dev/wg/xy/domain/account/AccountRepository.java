@@ -1,13 +1,8 @@
 package dev.wg.xy.domain.account;
 
-public interface AccountRepository {
+import dev.wg.xy.infrastructure.CrudRepository;
 
-    /***
-     *
-     * @param id
-     * @return
-     */
-    boolean existsById(Long id);
+public interface AccountRepository extends CrudRepository<Account, Long> {
 
     /***
      *
