@@ -3,10 +3,20 @@ apply plugin: 'org.springframework.boot'
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-starter-cache"
+
+    // 增加Jackson的Hibernate类型支持
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
+    // 增加Jackson XML支持
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
+
+    implementation 'javax.validation:validation-api'
 
     implementation 'org.joda:joda-money'
     implementation 'org.jadira.usertype:usertype.core'
     implementation "org.apache.commons:commons-lang3"
 
     runtimeOnly("com.h2database:h2")
+
 }
