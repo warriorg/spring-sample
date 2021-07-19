@@ -1,10 +1,9 @@
-package dev.wg.xy.infrastructure;
-
-import org.apache.ibatis.annotations.SelectProvider;
+package dev.warrior.xy.infrastructure;
 
 import java.util.Optional;
 
-public interface CrudMapper<T, ID> {
+public interface CrudRepository<T, ID> {
+
 
     /**
      * Retrieves an entity by its id.
@@ -13,8 +12,7 @@ public interface CrudMapper<T, ID> {
      * @return the entity with the given id or {@literal Optional#empty()} if none found.
      * @throws IllegalArgumentException if {@literal id} is {@literal null}.
      */
-    @SelectProvider(type = CrudProvider.class)
-    Optional<T> findById(final ID id);
+    Optional<T> findById(ID id);
 
     /**
      * Returns whether an entity with the given id exists.
@@ -23,7 +21,7 @@ public interface CrudMapper<T, ID> {
      * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
      * @throws IllegalArgumentException if {@literal id} is {@literal null}.
      */
-    boolean existsById(final ID id);
+    boolean existsById(ID id);
 
     /**
      * Returns all instances of the type.

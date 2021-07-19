@@ -1,4 +1,4 @@
-package dev.wg.xy.interfaces.rest;
+package dev.warrior.xy.interfaces.rest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

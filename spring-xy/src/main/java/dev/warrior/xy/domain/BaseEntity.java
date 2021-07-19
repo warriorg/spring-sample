@@ -1,4 +1,4 @@
-package dev.wg.xy.domain;
+package dev.warrior.xy.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

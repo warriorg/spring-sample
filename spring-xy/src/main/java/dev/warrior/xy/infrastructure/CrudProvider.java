@@ -1,4 +1,4 @@
-package dev.wg.xy.infrastructure;
+package dev.warrior.xy.infrastructure;
 
 import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;

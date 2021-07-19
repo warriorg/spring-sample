@@ -1,6 +1,6 @@
-package dev.wg.xy.domain.account;
+package dev.warrior.xy.domain.account;
 
-import dev.wg.xy.infrastructure.CrudRepository;
+import dev.warrior.xy.infrastructure.CrudRepository;
 
 public interface AccountRepository extends CrudRepository<Account, Long> {
 

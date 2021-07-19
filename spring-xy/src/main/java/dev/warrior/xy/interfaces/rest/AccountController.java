@@ -1,6 +1,5 @@
-package dev.wg.xy.interfaces.rest;
+package dev.warrior.xy.interfaces.rest;
 
-import dev.wg.xy.domain.account.validation.AccountValidation;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

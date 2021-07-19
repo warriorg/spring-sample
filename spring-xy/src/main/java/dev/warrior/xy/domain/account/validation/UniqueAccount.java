@@ -1,4 +1,4 @@
-package dev.wg.xy.domain.account.validation;
+package dev.warrior.xy.domain.account.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

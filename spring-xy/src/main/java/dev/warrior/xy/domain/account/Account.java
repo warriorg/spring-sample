@@ -1,6 +1,6 @@
-package dev.wg.xy.domain.account;
+package dev.warrior.xy.domain.account;
 
-import dev.wg.xy.domain.BaseEntity;
+import dev.warrior.xy.domain.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
-package dev.wg.xy.domain.account.validation;
+package dev.warrior.xy.domain.account.validation;
 
-import dev.wg.xy.domain.account.Account;
-import dev.wg.xy.domain.account.AccountRepository;
+import dev.warrior.xy.domain.account.Account;
+import dev.warrior.xy.domain.account.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

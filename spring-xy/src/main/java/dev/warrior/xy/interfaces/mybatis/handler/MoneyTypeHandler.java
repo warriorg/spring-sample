@@ -1,4 +1,4 @@
-package dev.wg.xy.interfaces.mybatis.handler;
+package dev.warrior.xy.interfaces.mybatis.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
