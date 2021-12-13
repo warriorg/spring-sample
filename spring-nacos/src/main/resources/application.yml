@@ -1,0 +1,18 @@
+nacos:
+  config:
+    type: yaml
+    namespace: learning
+    server-addr: 127.0.0.1:8848
+    data-id: learning
+    bootstrap:
+      enable: true
+    auto-refresh: true
+
+  discovery:
+    server-addr: 127.0.0.1:8848
+
+spring:
+  application:
+    name: spring-nacos
+server:
+  port: 9000
