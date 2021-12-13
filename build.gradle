@@ -43,7 +43,7 @@ subprojects {
     }
 
     clean{
-        delete "bin", ".settings", ".classpath", ".project"
+        delete "bin", "out", ".settings", ".classpath", ".project"
     }
 }
 
