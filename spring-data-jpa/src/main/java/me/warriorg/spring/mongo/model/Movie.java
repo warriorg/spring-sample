@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "t_movies")
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer", "handler", "fieldHandler"})
 public class Movie {
 
     @Id
