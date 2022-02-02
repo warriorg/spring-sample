@@ -5,3 +5,12 @@ spring:
     show-sql: true
     properties:
       format_sql: true
+
+logging:
+  level:
+    root: info
+    org.hibernate: info
+    # 在show-sql为true时显示sql中的动态参数值
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+    # 在show-sql为true时显示查询结果
+    org.hibernate.hql.internal.ast.exec.BasicExecutor: trace
