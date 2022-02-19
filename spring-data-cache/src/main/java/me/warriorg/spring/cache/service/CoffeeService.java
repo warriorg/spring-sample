@@ -1,8 +1,8 @@
-package me.warriorg.spring.redis.service;
+package me.warriorg.spring.cache.service;
 
 import lombok.extern.slf4j.Slf4j;
-import me.warriorg.spring.redis.model.Coffee;
-import me.warriorg.spring.redis.repository.CoffeeRepository;
+import me.warriorg.spring.cache.model.Coffee;
+import me.warriorg.spring.cache.repository.CoffeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;

@@ -1,4 +1,4 @@
-package me.warriorg.spring.redis.model;
+package me.warriorg.spring.cache.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
