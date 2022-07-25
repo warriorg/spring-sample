@@ -1,5 +1,6 @@
 rootProject.name = 'spring-sample'
 
+include 'spring-common'
 include 'spring-data-jpa'
 include 'spring-data-mongo'
 include 'spring-data-redis'
@@ -13,3 +14,4 @@ include 'spring-etcd'
 include 'spring-boot-mybatis'
 include 'spring-nacos'
 include 'spring-xy'
+

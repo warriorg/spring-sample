@@ -23,10 +23,6 @@ subprojects {
     }
 
     dependencies {
-        testImplementation 'org.junit.jupiter:junit-jupiter'
-        testImplementation "org.junit.jupiter:junit-jupiter-api"
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
-
         implementation "org.projectlombok:lombok"
         annotationProcessor "org.projectlombok:lombok"
 
@@ -34,6 +30,15 @@ subprojects {
         annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
         constraints {
+
+            implementation 'org.projectlombok:lombok:1.18.24'
+            annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+            implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+            annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
+            implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
+
             implementation 'org.mybatis.spring.boot:mybatis-spring-boot:2.2.0'
             implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
 
