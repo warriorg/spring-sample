@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version "2.6.1"
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 }
 
 subprojects {
@@ -44,6 +44,9 @@ subprojects {
 
             implementation 'org.joda:joda-money:1.0.1'
             implementation 'org.jadira.usertype:usertype.core:6.0.1.GA'
+
+            implementation "de.codecentric:spring-boot-admin-starter-server:2.5.1"
+            implementation "de.codecentric:spring-boot-admin-starter-client:2.5.1"
         }
     }
 
