@@ -1,0 +1,4 @@
+dependencies {
+    implementation "org.apache.dubbo:dubbo"
+    api project(':dubbo-api')
+}

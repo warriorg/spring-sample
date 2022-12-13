@@ -1,0 +1,20 @@
+dependencies {
+    implementation "org.apache.dubbo:dubbo"
+    implementation "org.springframework:spring-context"
+    implementation "org.springframework:spring-beans"
+    implementation "org.springframework:spring-core"
+    implementation "org.springframework:spring-tx"
+    implementation "org.springframework:spring-jdbc"
+
+    implementation "org.slf4j:slf4j-api"
+    implementation "ch.qos.logback:logback-core"
+    implementation "ch.qos.logback:logback-classic"
+
+    implementation project(":00-api")
+}
+
+//// 结局直接跑错误的问题
+//task execute(type:JavaExec) {
+//    main = "me.warriorg.dubbo.service.run.ProviderApp"
+//    classpath = sourceSets.main.runtimeClasspath
+//}

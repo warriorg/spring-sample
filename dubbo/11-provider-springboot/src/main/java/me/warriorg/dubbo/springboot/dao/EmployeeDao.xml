@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.warriorg.dubbo.springboot.dao.EmployeeDao">
+
+
+    <insert id="insertEmployee">
+        insert into employee(name, age) values(#{name}, #{age})
+    </insert>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(1) from employee
+    </select>
+    <select id="selectById" resultType="me.warriorg.dubbo.model.Employee">
+        select id, name, age from employee where id = #{id};
+    </select>
+</mapper>

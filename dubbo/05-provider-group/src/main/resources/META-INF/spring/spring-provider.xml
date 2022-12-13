@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!--指定当前工程在管控平台中的名称-->
+    <dubbo:application name="05-provider-group" />
+
+    <!--指定注册中心, 单机版zk-->
+    <!--<dubbo:registry address="zookeeper://localhost:2181"/>-->
+    <!--另一种写法-->
+    <!--<dubbo:registry protocol="zookeeper" address="localhost:2181"/>-->
+
+    <!--指定注册中心, 集群版zk-->
+    <dubbo:registry address="zookeeper://localhost:2181?backup=localhost:2182,localhost:2183"/>
+    <!--另一种写法-->
+    <!--<dubbo:registry protocol="zookeeper" address="localhost:2181,localhost:2182,localhost:2183"/>-->
+
+    <!--声明协议使用什么端口号-->
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="rmi" prompt="20881"/>
+
+    <!--注册业务接口实现类， 它是真正的服务提供者-->
+    <bean id="alipayService" class="me.warriorg.dubbo.service.provider.WechatServiceImpl"/>
+    <bean id="wechatService" class="me.warriorg.dubbo.service.provider.AlipayServiceImpl"/>
+    <!--服务暴露-->
+    <dubbo:service interface="me.warriorg.dubbo.service.FooService" ref="alipayService" group="pay.alipay" protocol="rmi"/>
+    <dubbo:service interface="me.warriorg.dubbo.service.FooService" ref="wechatService" group="pay.wechat" protocol="dubbo,rmi" />
+
+</beans>

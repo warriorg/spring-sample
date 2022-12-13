@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+    <!--指定当前工程在管控平台中的名称-->
+    <dubbo:application name="02-provider-zk" />
+
+    <!--指定注册中心, 单机版zk-->
+    <!--<dubbo:registry address="zookeeper://localhost:2181"/>-->
+    <!--另一种写法-->
+    <!--<dubbo:registry protocol="zookeeper" address="localhost:2181"/>-->
+
+    <!--指定注册中心, 集群版zk-->
+    <dubbo:registry address="zookeeper://localhost:2181?backup=localhost:2182,localhost:2183"/>
+    <!--另一种写法-->
+    <!--<dubbo:registry protocol="zookeeper" address="localhost:2181,localhost:2182,localhost:2183"/>-->
+
+    <dubbo:protocol name="dubbo" port="20881"/>
+
+    <!--注册业务接口实现类， 它是真正的服务提供者-->
+    <bean id="fooService" class="me.warriorg.dubbo.service.provider.FooServiceImpl"/>
+    <!--服务暴露-->
+    <dubbo:service interface="me.warriorg.dubbo.service.FooService" ref="fooService" retries="3" cluster="failfast">
+        <dubbo:method name="hello" loadbalance="consistenthash" retries="2"/>
+    </dubbo:service>
+</beans>
