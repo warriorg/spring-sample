@@ -1,0 +1,10 @@
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation 'org.springframework:spring-expression'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+}

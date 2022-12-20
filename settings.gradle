@@ -15,4 +15,5 @@ include 'spring-boot-mybatis'
 include 'spring-nacos'
 include 'spring-xy'
 include 'spring-boot-admin'
+include 'spring-spel'
 
