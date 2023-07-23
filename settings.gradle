@@ -1,5 +1,6 @@
 rootProject.name = 'spring-sample'
 
+include 'spring'
 include 'spring-common'
 include 'spring-data-jpa'
 include 'spring-data-mongo'
