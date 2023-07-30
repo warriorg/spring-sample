@@ -22,26 +22,18 @@ subprojects {
     }
 
     dependencies {
-        implementation "org.projectlombok:lombok"
-        annotationProcessor "org.projectlombok:lombok"
+        implementation 'org.projectlombok:lombok:1.18.28'
+        annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
         implementation 'org.mapstruct:mapstruct:1.5.3.Final'
         annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
-        constraints {
-            implementation 'org.mybatis.spring.boot:mybatis-spring-boot:2.2.0'
-            implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
 
-            implementation 'org.joda:joda-money:1.0.1'
-            implementation 'org.jadira.usertype:usertype.core:6.0.1.GA'
+    }
 
-            implementation "de.codecentric:spring-boot-admin-starter-server:2.5.1"
-            implementation "de.codecentric:spring-boot-admin-starter-client:2.5.1"
-
-
-            testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-            testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
-            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
         }
     }
 

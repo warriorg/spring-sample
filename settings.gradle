@@ -1,6 +1,5 @@
 rootProject.name = 'spring-sample'
 
-include 'spring'
 include 'spring-common'
 include 'spring-data-jpa'
 include 'spring-data-mongo'
@@ -17,4 +16,9 @@ include 'spring-nacos'
 include 'spring-xy'
 include 'spring-boot-admin'
 include 'spring-spel'
+
+file('thinking-in-spring').eachDir { dir ->
+    include dir.name
+    project(":${dir.name}").projectDir = dir
+}
 
