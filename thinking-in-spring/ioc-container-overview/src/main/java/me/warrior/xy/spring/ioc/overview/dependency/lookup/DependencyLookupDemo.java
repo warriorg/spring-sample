@@ -1,9 +1,9 @@
-package me.warrior.xy.ioc.overview.dependency.lookup;
+package me.warrior.xy.spring.ioc.overview.dependency.lookup;
 
 import java.util.Map;
 
-import me.warrior.xy.ioc.overview.annotation.Super;
-import me.warrior.xy.ioc.overview.domain.User;
+import me.warrior.xy.spring.ioc.overview.annotation.Super;
+import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;

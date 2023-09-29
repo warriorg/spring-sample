@@ -1,8 +1,8 @@
-package me.warrior.xy.ioc.overview.repository;
+package me.warrior.xy.spring.ioc.overview.repository;
 
 import java.util.Collection;
 
-import me.warrior.xy.ioc.overview.domain.User;
+import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;

@@ -8,7 +8,7 @@
 
     <!-- 手动配置 -->
     <!--
-   <bean id="userRepository" class="me.warrior.xy.ioc.overview.repository.UserRepository">
+   <bean id="userRepository" class="repository.me.warrior.xy.spring.ioc.overview.UserRepository">
        <property name="users">
            <util:list>
                <ref bean="user"/>
@@ -18,7 +18,7 @@
     </bean>
     -->
     <!-- 自动配置 Auto-Wiring -->
-    <bean id="userRepository" class="me.warrior.xy.ioc.overview.repository.UserRepository" autowire="byType">
+    <bean id="userRepository" class="me.warrior.xy.spring.ioc.overview.repository.UserRepository" autowire="byType">
 
     </bean>
 

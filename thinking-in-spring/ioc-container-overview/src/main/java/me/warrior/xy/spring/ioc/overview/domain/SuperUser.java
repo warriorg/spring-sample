@@ -1,6 +1,6 @@
-package me.warrior.xy.ioc.overview.domain;
+package me.warrior.xy.spring.ioc.overview.domain;
 
-import me.warrior.xy.ioc.overview.annotation.Super;
+import me.warrior.xy.spring.ioc.overview.annotation.Super;
 
 @Super
 public class SuperUser extends User {

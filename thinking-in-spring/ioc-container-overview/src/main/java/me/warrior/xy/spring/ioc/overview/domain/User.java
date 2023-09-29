@@ -1,4 +1,4 @@
-package me.warrior.xy.ioc.overview.domain;
+package me.warrior.xy.spring.ioc.overview.domain;
 
 public class User {
     private Integer id;
