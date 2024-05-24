@@ -1,5 +1,6 @@
 rootProject.name = 'spring-sample'
 
+include 'spring-boot-camunda'
 include 'spring-aop'
 include 'spring-batch'
 include 'spring-common'
