@@ -1,0 +1,14 @@
+package dev.warriorg.retro.persistence;
+
+import java.util.Iterator;
+import java.util.Optional;
+
+public interface BaseRepository<D, ID> {
+    D save(D domain);
+
+    Optional<D> findById(ID id);
+
+    Iterable<D> findAll();
+
+    void delete(ID id);
+}

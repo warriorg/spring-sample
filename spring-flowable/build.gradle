@@ -1,0 +1,9 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation 'org.flowable:flowable-spring-boot-starter:7.1.0'
+    runtimeOnly 'com.h2database:h2'
+    implementation project(":spring-dto")
+}
