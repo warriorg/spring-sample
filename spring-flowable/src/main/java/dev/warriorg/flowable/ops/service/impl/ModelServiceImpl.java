@@ -7,6 +7,7 @@ import dev.warriorg.dto.PageDTO;
 import dev.warriorg.dto.R;
 import dev.warriorg.flowable.ops.dto.ModelDTO;
 import dev.warriorg.flowable.ops.service.ModelService;
+import org.flowable.bpmn.model.BpmnModel;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.Model;
 import org.flowable.engine.repository.ModelQuery;
@@ -51,9 +52,9 @@ public class ModelServiceImpl implements ModelService {
         model.setKey(dto.getKey());
         model.setCategory(dto.getCategory());
         model.setMetaInfo(dto.getMetaInfo());
+        repositoryService.saveModel(model);
 
         repositoryService.addModelEditorSource(model.getId(), dto.getBpmnXml().getBytes(StandardCharsets.UTF_8));
-        repositoryService.saveModel(model);
     }
 
     /**
@@ -64,6 +65,7 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public void deploy(String modelId) {
         Model model = repositoryService.createModelQuery().modelId(modelId).singleResult();
-
+//        BpmnModel bpmnModel = WfModelUtil.getBpmnModel(model.get());
+//        bpmnModel.setTargetNamespace(category);
     }
 }

@@ -17,3 +17,7 @@ spring:
 server:
   servlet:
     context-path: /flowable
+
+logging:
+  level:
+    org.flowable: DEBUG
