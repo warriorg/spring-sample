@@ -1,6 +1,5 @@
 package dev.warriorg.flowable.app.entity;
 
-
 public class Approval {
 
     private String id;
@@ -21,5 +20,4 @@ public class Approval {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
 }

@@ -1,7 +1,6 @@
 package me.warrior.xy.spring.ioc.overview.dependency.lookup;
 
 import java.util.Map;
-
 import me.warrior.xy.spring.ioc.overview.annotation.Super;
 import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
@@ -17,7 +16,8 @@ public class DependencyLookupDemo {
     public static void main(String[] args) {
         // 配置 XML 配置文件
         // 启动 Spring 应用上下文
-        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-lookup-context.xml");
+        BeanFactory beanFactory =
+                new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-lookup-context.xml");
         lookupByType(beanFactory);
         lookupByCollectionType(beanFactory);
         lookupByAnnotationType(beanFactory);
@@ -31,7 +31,7 @@ public class DependencyLookupDemo {
      */
     private static void lookupByAnnotationType(BeanFactory beanFactory) {
         if (beanFactory instanceof ListableBeanFactory listableBeanFactory) {
-            Map<String, User> userMap = (Map)listableBeanFactory.getBeansWithAnnotation(Super.class);
+            Map<String, User> userMap = (Map) listableBeanFactory.getBeansWithAnnotation(Super.class);
             System.out.println("查找标注 @Super 所有的 User 集合对象：" + userMap);
         }
     }

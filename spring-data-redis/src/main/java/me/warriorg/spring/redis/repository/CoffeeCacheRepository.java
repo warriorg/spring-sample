@@ -1,9 +1,8 @@
 package me.warriorg.spring.redis.repository;
 
+import java.util.Optional;
 import me.warriorg.spring.redis.model.CoffeeCache;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.Optional;
 
 public interface CoffeeCacheRepository extends CrudRepository<CoffeeCache, Long> {
 

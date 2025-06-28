@@ -6,12 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,11 +24,11 @@ public class UsernamePasswordSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/username/password/login").permitAll()
-                        .anyRequest().authenticated()
-                );
+        http.authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/username/password/login")
+                .permitAll()
+                .anyRequest()
+                .authenticated());
 
         // Without default, the postman call returns 403
         http.csrf(AbstractHttpConfigurer::disable);
@@ -39,8 +37,7 @@ public class UsernamePasswordSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService,
-            PasswordEncoder passwordEncoder) {
+            UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);
@@ -68,5 +65,4 @@ public class UsernamePasswordSecurityConfig {
     public void configure(AuthenticationManagerBuilder builder) {
         builder.eraseCredentials(false);
     }
-
 }

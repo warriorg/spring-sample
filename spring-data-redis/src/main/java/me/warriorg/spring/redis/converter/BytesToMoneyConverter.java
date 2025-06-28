@@ -1,11 +1,10 @@
 package me.warriorg.spring.redis.converter;
 
+import java.nio.charset.StandardCharsets;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.convert.ReadingConverter;
-
-import java.nio.charset.StandardCharsets;
 
 @ReadingConverter
 public class BytesToMoneyConverter implements Converter<byte[], Money> {

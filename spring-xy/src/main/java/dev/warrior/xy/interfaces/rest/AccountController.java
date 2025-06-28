@@ -5,7 +5,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccountController {
 
-    public void test() {
-
-    }
+    public void test() {}
 }

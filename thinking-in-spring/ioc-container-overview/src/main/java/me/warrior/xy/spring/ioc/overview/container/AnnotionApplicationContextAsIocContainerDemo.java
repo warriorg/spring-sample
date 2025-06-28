@@ -1,7 +1,6 @@
 package me.warrior.xy.spring.ioc.overview.container;
 
 import java.util.Map;
-
 import me.warrior.xy.spring.ioc.overview.domain.SuperUser;
 import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
@@ -22,7 +21,6 @@ public class AnnotionApplicationContextAsIocContainerDemo {
         // 注册当前类为配置类
         applicationContext.register(AnnotionApplicationContextAsIocContainerDemo.class);
         applicationContext.refresh();
-
 
         lookupByCollectionType(applicationContext);
     }

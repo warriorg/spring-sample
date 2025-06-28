@@ -3,13 +3,12 @@
  */
 package dev.warriorg.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**

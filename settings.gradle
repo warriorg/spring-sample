@@ -1,5 +1,6 @@
 rootProject.name = 'spring-sample'
 
+include 'platform'
 include 'spring-ai'
 include 'spring-aop'
 include 'spring-aot'

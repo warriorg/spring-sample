@@ -6,8 +6,7 @@ public class Article {
     private String author;
     private String url;
 
-    public Article() {
-    }
+    public Article() {}
 
     public Article(String author, String url) {
         this.author = author;
@@ -48,5 +47,4 @@ public class Article {
     public String toString() {
         return ("[" + this.author + " " + this.url + "]");
     }
-
 }

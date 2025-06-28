@@ -1,8 +1,7 @@
 package dev.warrior.xy.infrastructure;
 
-import org.apache.ibatis.annotations.SelectProvider;
-
 import java.util.Optional;
+import org.apache.ibatis.annotations.SelectProvider;
 
 public interface CrudMapper<T, ID> {
 
@@ -69,7 +68,6 @@ public interface CrudMapper<T, ID> {
      * @since 2.5
      */
     void deleteAllById(Iterable<? extends ID> ids);
-
 
     /***
      * 保存

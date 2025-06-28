@@ -1,7 +1,6 @@
 package me.warrior.xy.spring.ioc.overview.repository;
 
 import java.util.Collection;
-
 import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
@@ -37,8 +36,7 @@ public class UserRepository {
         return userObjectFactory;
     }
 
-    public void setUserObjectFactory(
-            ObjectFactory<User> userObjectFactory) {
+    public void setUserObjectFactory(ObjectFactory<User> userObjectFactory) {
         this.userObjectFactory = userObjectFactory;
     }
 
@@ -46,8 +44,7 @@ public class UserRepository {
         return applicationObjectFactory;
     }
 
-    public void setApplicationObjectFactory(
-            ObjectFactory<ApplicationContext> applicationObjectFactory) {
+    public void setApplicationObjectFactory(ObjectFactory<ApplicationContext> applicationObjectFactory) {
         this.applicationObjectFactory = applicationObjectFactory;
     }
 }

@@ -23,12 +23,9 @@ public class UsernamePasswordLoginController {
     public ResponseEntity<Authentication> login(@RequestBody LoginRequest loginRequest) {
         Authentication authenticationRequest =
                 UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.username(), loginRequest.password());
-        Authentication authenticationResponse =
-                this.authenticationManager.authenticate(authenticationRequest);
+        Authentication authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
         return ResponseEntity.ok().body(authenticationResponse);
     }
 
-    public record LoginRequest(String username, String password) {
-    }
-
+    public record LoginRequest(String username, String password) {}
 }

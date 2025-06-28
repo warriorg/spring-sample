@@ -4,13 +4,12 @@ import dev.warrior.spring.mvc.model.Coffee;
 import dev.warrior.spring.mvc.model.CoffeeOrder;
 import dev.warrior.spring.mvc.model.OrderState;
 import dev.warrior.spring.mvc.repository.CoffeeOrderRepository;
+import java.util.ArrayList;
+import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Service
 @Transactional
@@ -23,7 +22,7 @@ public class CoffeeOrderService {
         return orderRepository.getOne(id);
     }
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffee) {
+    public CoffeeOrder createOrder(String customer, Coffee... coffee) {
         CoffeeOrder order = CoffeeOrder.builder()
                 .customer(customer)
                 .items(new ArrayList<>(Arrays.asList(coffee)))

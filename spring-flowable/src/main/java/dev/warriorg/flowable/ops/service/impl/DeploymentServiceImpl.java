@@ -1,10 +1,9 @@
 package dev.warriorg.flowable.ops.service.impl;
 
-import java.util.List;
-
 import dev.warriorg.dto.PageDTO;
 import dev.warriorg.dto.R;
 import dev.warriorg.flowable.ops.service.DeploymentService;
+import java.util.List;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.Deployment;
 import org.flowable.engine.repository.DeploymentQuery;
@@ -27,6 +26,7 @@ public class DeploymentServiceImpl implements DeploymentService {
     @Override
     public R<List<Deployment>> list(PageDTO pageDTO) {
         DeploymentQuery query = repositoryService.createDeploymentQuery();
-        return R.of(query.listPage(pageDTO.getPage().intValue(), pageDTO.getSize().intValue()), query.count());
+        return R.of(
+                query.listPage(pageDTO.getPage().intValue(), pageDTO.getSize().intValue()), query.count());
     }
 }

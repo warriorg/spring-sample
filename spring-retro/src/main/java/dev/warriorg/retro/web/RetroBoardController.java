@@ -1,15 +1,14 @@
 package dev.warriorg.retro.web;
 
+import dev.warriorg.retro.board.Card;
+import dev.warriorg.retro.board.RetroBoard;
+import dev.warriorg.retro.service.RetroBoardService;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import dev.warriorg.retro.board.Card;
-import dev.warriorg.retro.board.RetroBoard;
-import dev.warriorg.retro.service.RetroBoardService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,8 +42,7 @@ public class RetroBoardController {
     @PostMapping
     public ResponseEntity<RetroBoard> saveRetroBoard(RetroBoard retroBoard) {
         RetroBoard result = this.retroBoardService.save(retroBoard);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
                 .buildAndExpand(result.getId().toString())
                 .toUri();
@@ -64,8 +62,7 @@ public class RetroBoardController {
     @PutMapping("{uuid}/cards")
     public ResponseEntity<Card> addCardToRetroBoard(@PathVariable UUID uuid, @RequestBody Card card) {
         Card result = this.retroBoardService.addCardToRetroBoard(uuid, card);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
                 .buildAndExpand(result.getId().toString())
                 .toUri();
@@ -95,6 +92,4 @@ public class RetroBoardController {
         response.put("errors", errors);
         return response;
     }
-
-
 }

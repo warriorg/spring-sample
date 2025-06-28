@@ -2,13 +2,21 @@ plugins {
     id 'org.springframework.boot' version '3.4.2'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'org.graalvm.buildtools.native' version '0.10.5'
+    id "com.diffplug.spotless" version "7.0.4"
 }
 
 subprojects {
 
+    if (it.name == "platform") {
+        return;
+    }
+
     apply plugin: 'java'
     apply plugin: 'java-library'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'pmd'
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.diffplug.spotless'
 
     repositories {
         mavenLocal()
@@ -39,15 +47,10 @@ subprojects {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+        api platform(project(':platform'))
+
         constraints {
             implementation 'com.mysql:mysql-connector-j:9.2.0'
-        }
-    }
-
-
-    dependencyManagement {
-        imports {
-            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
         }
     }
 
@@ -58,6 +61,30 @@ subprojects {
     test {
         useJUnitPlatform()
     }
+
+
+    pmd {
+        consoleOutput = true
+        rulesMinimumPriority = 5
+        ruleSetFiles = files(rootProject.rootDir.getPath() + '/specification/pmd/ruleset.xml')
+        ruleSets = []
+    }
+
+    spotless {
+        java {
+            removeUnusedImports()
+            trimTrailingWhitespace()
+            leadingTabsToSpaces(4)
+
+            palantirJavaFormat()
+            formatAnnotations()
+        }
+    }
+
+    checkstyle {
+        config = rootProject.resources.text.fromFile("${rootProject.rootDir.getPath()}/specification/style/checkstyle.xml")
+    }
+
 }
 
 tasks.withType(Wrapper) {

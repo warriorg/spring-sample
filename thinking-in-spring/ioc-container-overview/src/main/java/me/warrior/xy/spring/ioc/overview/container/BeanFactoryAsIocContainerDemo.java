@@ -1,7 +1,6 @@
 package me.warrior.xy.spring.ioc.overview.container;
 
 import java.util.Map;
-
 import me.warrior.xy.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;

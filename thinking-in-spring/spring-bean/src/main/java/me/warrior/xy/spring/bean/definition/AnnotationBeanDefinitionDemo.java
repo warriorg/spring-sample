@@ -1,12 +1,8 @@
 package me.warrior.xy.spring.bean.definition;
 
-import java.util.Map;
-
 import me.warrior.xy.spring.ioc.overview.domain.SuperUser;
 import me.warrior.xy.spring.ioc.overview.domain.User;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +36,7 @@ public class AnnotationBeanDefinitionDemo {
     public static void registerBeanDefinition(BeanDefinitionRegistry registry, String beanName, Class<?> beanClass) {
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanName);
         beanDefinitionBuilder.addPropertyValue("id", 1);
-        
+
         registry.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
     }
 
@@ -57,6 +53,4 @@ public class AnnotationBeanDefinitionDemo {
             return user;
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import dev.warrior.spring.mvc.model.Coffee;
 import dev.warrior.spring.mvc.model.CoffeeOrder;
 import dev.warrior.spring.mvc.service.CoffeeOrderService;
 import dev.warrior.spring.mvc.service.CoffeeService;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +16,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/order")
 @Slf4j
 public class CoffeeOrderController {
     @Autowired
     private CoffeeOrderService orderService;
+
     @Autowired
     private CoffeeService coffeeService;
 
@@ -32,15 +32,15 @@ public class CoffeeOrderController {
         return orderService.get(id);
     }
 
-
-    @PostMapping(path = "/", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(
+            path = "/",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public CoffeeOrder create(@RequestBody NewOrderRequest newOrder) {
         log.info("Receive new Order {}", newOrder);
-        Coffee[] coffeeList = coffeeService.getCoffeeByName(newOrder.getItems())
-                .toArray(new Coffee[] {});
+        Coffee[] coffeeList = coffeeService.getCoffeeByName(newOrder.getItems()).toArray(new Coffee[] {});
         return orderService.createOrder(newOrder.getCustomer(), coffeeList);
     }
 
@@ -55,8 +55,7 @@ public class CoffeeOrderController {
     }
 
     @PostMapping(path = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createOrder(@Validated NewOrderRequest newOrder,
-                              BindingResult result, ModelMap map) {
+    public String createOrder(@Validated NewOrderRequest newOrder, BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
             log.warn("Binding Result: {}", result);
             map.addAttribute("message", result.toString());
@@ -64,8 +63,7 @@ public class CoffeeOrderController {
         }
 
         log.info("Receive new Order {}", newOrder);
-        Coffee[] coffeeList = coffeeService.getCoffeeByName(newOrder.getItems())
-                .toArray(new Coffee[] {});
+        Coffee[] coffeeList = coffeeService.getCoffeeByName(newOrder.getItems()).toArray(new Coffee[] {});
         CoffeeOrder order = orderService.createOrder(newOrder.getCustomer(), coffeeList);
         return "redirect:/order/" + order.getId();
     }

@@ -11,7 +11,6 @@ dependencies {
     // 增加Jackson XML支持
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
 
-    implementation 'javax.validation:validation-api'
 
     implementation 'org.joda:joda-money'
     implementation 'org.jadira.usertype:usertype.core'

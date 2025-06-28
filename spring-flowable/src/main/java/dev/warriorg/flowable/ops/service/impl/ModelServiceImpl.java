@@ -1,13 +1,11 @@
 package dev.warriorg.flowable.ops.service.impl;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-
 import dev.warriorg.dto.PageDTO;
 import dev.warriorg.dto.R;
 import dev.warriorg.flowable.ops.dto.ModelDTO;
 import dev.warriorg.flowable.ops.service.ModelService;
-import org.flowable.bpmn.model.BpmnModel;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import org.flowable.engine.RepositoryService;
 import org.flowable.engine.repository.Model;
 import org.flowable.engine.repository.ModelQuery;
@@ -27,7 +25,10 @@ public class ModelServiceImpl implements ModelService {
     public R<List<Model>> list(PageDTO pageDTO) {
         ModelQuery modelQuery = repositoryService.createModelQuery();
 
-        R<List<Model>> r = R.of(modelQuery.listPage(pageDTO.getPage().intValue(), pageDTO.getSize().intValue()), modelQuery.count());
+        R<List<Model>> r = R.of(
+                modelQuery.listPage(
+                        pageDTO.getPage().intValue(), pageDTO.getSize().intValue()),
+                modelQuery.count());
         return r;
     }
 
@@ -65,7 +66,7 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public void deploy(String modelId) {
         Model model = repositoryService.createModelQuery().modelId(modelId).singleResult();
-//        BpmnModel bpmnModel = WfModelUtil.getBpmnModel(model.get());
-//        bpmnModel.setTargetNamespace(category);
+        //        BpmnModel bpmnModel = WfModelUtil.getBpmnModel(model.get());
+        //        bpmnModel.setTargetNamespace(category);
     }
 }

@@ -1,10 +1,7 @@
 package dev.warrior.spring.batch;
 
-import java.util.Set;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.JobRegistry;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -37,7 +34,8 @@ public class BatchApplication {
 
     @Bean
     Step step(JobRepository jobRepository, Tasklet tasklet, PlatformTransactionManager transactionManager) {
-        return new StepBuilder("step", jobRepository).tasklet(tasklet, transactionManager).build();
+        return new StepBuilder("step", jobRepository)
+                .tasklet(tasklet, transactionManager)
+                .build();
     }
-
 }

@@ -6,9 +6,10 @@ import org.apache.ibatis.jdbc.SQL;
 public class CrudProvider implements ProviderMethodResolver {
 
     public String findById(final String id) {
-        return new SQL() {{
-            SELECT("");
-
-        }}.toString();
+        return new SQL() {
+            {
+                SELECT("");
+            }
+        }.toString();
     }
 }

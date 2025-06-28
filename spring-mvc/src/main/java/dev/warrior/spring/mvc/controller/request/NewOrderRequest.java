@@ -1,10 +1,9 @@
 package dev.warrior.spring.mvc.controller.request;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -13,4 +12,3 @@ public class NewOrderRequest {
     private String customer;
     private List<String> items;
 }
-

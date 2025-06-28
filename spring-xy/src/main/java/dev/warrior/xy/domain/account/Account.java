@@ -1,10 +1,9 @@
 package dev.warrior.xy.domain.account;
 
 import dev.warrior.xy.domain.BaseEntity;
-import lombok.*;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import lombok.*;
 
 @Builder
 @Data
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "t_account")
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 public class Account extends BaseEntity {
 
     private String username;

@@ -20,15 +20,11 @@ public class BeanDefinitionCreateionDemo {
         // 获取 BeanDefinition 实例
         BeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
 
-
         // 2. 通过 AbstractBeanDefinition 以及派生类
         GenericBeanDefinition genericBeanDefinition = new GenericBeanDefinition();
         genericBeanDefinition.setBeanClass(User.class);
         MutablePropertyValues propertyValues = new MutablePropertyValues();
-        propertyValues
-                .add("id", 1)
-                .add("name", "张三");
+        propertyValues.add("id", 1).add("name", "张三");
         genericBeanDefinition.setPropertyValues(propertyValues);
     }
-
 }

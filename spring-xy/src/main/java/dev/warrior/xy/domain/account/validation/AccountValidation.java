@@ -2,14 +2,13 @@ package dev.warrior.xy.domain.account.validation;
 
 import dev.warrior.xy.domain.account.Account;
 import dev.warrior.xy.domain.account.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import java.lang.annotation.Annotation;
 import java.util.function.Predicate;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class AccountValidation <T extends Annotation> implements ConstraintValidator<T, Account> {
+public class AccountValidation<T extends Annotation> implements ConstraintValidator<T, Account> {
 
     @Autowired
     protected AccountRepository accountRepository;
@@ -34,10 +33,8 @@ public class AccountValidation <T extends Annotation> implements ConstraintValid
 
     public static class UniqueAccountValidator extends AccountValidation<UniqueAccount> {
         public void initialize(UniqueAccount constraintAnnotation) {
-            predicate = c -> !accountRepository.existsByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());
+            predicate = c -> !accountRepository.existsByUsernameOrEmailOrTelephone(
+                    c.getUsername(), c.getEmail(), c.getTelephone());
         }
     }
-
 }
-
-

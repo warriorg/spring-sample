@@ -1,7 +1,6 @@
 package dev.warriorg.flowable.ops.dto;
 
 import java.io.Serializable;
-
 import lombok.Data;
 
 @Data

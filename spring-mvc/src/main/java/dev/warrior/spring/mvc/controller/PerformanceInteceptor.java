@@ -1,20 +1,20 @@
 package dev.warrior.spring.mvc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StopWatch;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @Slf4j
 public class PerformanceInteceptor implements HandlerInterceptor {
     private ThreadLocal<StopWatch> stopWatch = new ThreadLocal<>();
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
         StopWatch sw = new StopWatch();
         stopWatch.set(sw);
         sw.start();
@@ -22,13 +22,16 @@ public class PerformanceInteceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(
+            HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
+            throws Exception {
         stopWatch.get().stop();
         stopWatch.get().start();
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
         StopWatch sw = stopWatch.get();
         sw.stop();
         String method = handler.getClass().getSimpleName();
@@ -37,9 +40,14 @@ public class PerformanceInteceptor implements HandlerInterceptor {
             String methodName = ((HandlerMethod) handler).getMethod().getName();
             method = beanType + "." + methodName;
         }
-        log.info("{};{};{};{};{}ms;{}ms;{}ms", request.getRequestURI(), method,
-                response.getStatus(), ex == null ? "-" : ex.getClass().getSimpleName(),
-                sw.getTotalTimeMillis(), sw.getTotalTimeMillis() - sw.getLastTaskTimeMillis(),
+        log.info(
+                "{};{};{};{};{}ms;{}ms;{}ms",
+                request.getRequestURI(),
+                method,
+                response.getStatus(),
+                ex == null ? "-" : ex.getClass().getSimpleName(),
+                sw.getTotalTimeMillis(),
+                sw.getTotalTimeMillis() - sw.getLastTaskTimeMillis(),
                 sw.getLastTaskTimeMillis());
         stopWatch.remove();
     }

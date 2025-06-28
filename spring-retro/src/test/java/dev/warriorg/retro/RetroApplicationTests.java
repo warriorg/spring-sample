@@ -1,21 +1,18 @@
 package dev.warriorg.retro;
 
-
-import java.util.Collection;
-import java.util.UUID;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import dev.warriorg.retro.board.Card;
 import dev.warriorg.retro.board.CardType;
 import dev.warriorg.retro.board.RetroBoard;
 import dev.warriorg.retro.service.RetroBoardService;
+import java.util.Collection;
+import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-
 
 @SpringBootTest
 public class RetroApplicationTests {
@@ -29,7 +26,8 @@ public class RetroApplicationTests {
 
     @Test
     void saveRetroBoardTest() {
-        RetroBoard retroBoard = retroBoardService.save(RetroBoard.builder().name("Gathering 2025").build());
+        RetroBoard retroBoard = retroBoardService.save(
+                RetroBoard.builder().name("Gathering 2025").build());
         Assertions.assertNotNull(retroBoard);
         Assertions.assertNotNull(retroBoard.getId());
     }
@@ -44,8 +42,9 @@ public class RetroApplicationTests {
     @Test
     void cardsRetroBoardNotFoundTest() {
         assertThatThrownBy(() -> {
-            retroBoardService.findAllCardsFromRetroBoard(UUID.randomUUID());
-        }).isInstanceOf(RuntimeException.class);
+                    retroBoardService.findAllCardsFromRetroBoard(UUID.randomUUID());
+                })
+                .isInstanceOf(RuntimeException.class);
     }
 
     @Test
@@ -65,9 +64,12 @@ public class RetroApplicationTests {
 
     @Test
     void addCardToRetroBoardTest() {
-        Card card = retroBoardService.addCardToRetroBoard(retroBoardUUID, Card.builder()
-                .comment("Amazing session").cardType(CardType.HAPPY)
-                .build());
+        Card card = retroBoardService.addCardToRetroBoard(
+                retroBoardUUID,
+                Card.builder()
+                        .comment("Amazing session")
+                        .cardType(CardType.HAPPY)
+                        .build());
 
         assertThat(card).isNotNull();
         assertThat(card.getId()).isNotNull();
@@ -101,8 +103,8 @@ public class RetroApplicationTests {
     @Test
     void findCardByIdInRetroBoardNotFoundTest() {
         assertThatThrownBy(() -> {
-            retroBoardService.findCardByUUIDFromRetroBoard(retroBoardUUID, mehCardUUID);
-        }).isInstanceOf(RuntimeException.class);
+                    retroBoardService.findCardByUUIDFromRetroBoard(retroBoardUUID, mehCardUUID);
+                })
+                .isInstanceOf(RuntimeException.class);
     }
-
 }

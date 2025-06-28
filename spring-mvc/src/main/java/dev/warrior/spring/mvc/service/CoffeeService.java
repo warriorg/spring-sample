@@ -2,6 +2,7 @@ package dev.warrior.spring.mvc.service;
 
 import dev.warrior.spring.mvc.model.Coffee;
 import dev.warrior.spring.mvc.repository.CoffeeRepository;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
