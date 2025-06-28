@@ -11,6 +11,21 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+  nacos:
+    image: nacos/nacos-server:v3.0.1
+    container_name: nacos
+    restart: always
+    environment:
+      - MODE=standalone
+      - NACOS_AUTH_ENABLE=false
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    volumes:
+      - nacos_data:/home/nacos/nacos-data
 volumes:
   rabbitmq_data:
     driver: local
