@@ -82,6 +82,7 @@ subprojects {
     }
 
     checkstyle {
+        toolVersion = "10.12.4"
         config = rootProject.resources.text.fromFile("${rootProject.rootDir.getPath()}/specification/style/checkstyle.xml")
     }
 
