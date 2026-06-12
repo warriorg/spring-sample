@@ -1,5 +1,16 @@
 rootProject.name = 'spring-sample'
 
+include 'platform'
+include 'spring-ai'
+include 'spring-ai-mcp-client'
+include 'spring-ai-mcp-server-webmvc'
+include 'spring-ai-mcp-server-webflux'
+include 'spring-aop'
+include 'spring-aot'
+include 'spring-authorization-resource-server'
+include 'spring-authorization-server'
+include 'spring-batch'
+include 'spring-boot-camunda'
 include 'spring-common'
 include 'spring-data-jpa'
 include 'spring-data-mongo'
@@ -7,13 +18,23 @@ include 'spring-data-redis'
 include 'spring-data-r2dbc'
 include 'spring-data-elasticsearch'
 include 'spring-data-cache'
-include 'spring-aop'
+include 'spring-flowable'
 include 'spring-mvc'
 include 'spring-datasource'
+include 'spring-dto'
 include 'spring-etcd'
 include 'spring-boot-mybatis'
 include 'spring-nacos'
+include 'spring-rabbitmq'
+include 'spring-retro'
+include 'spring-scheduling'
+include 'spring-security'
 include 'spring-xy'
 include 'spring-boot-admin'
 include 'spring-spel'
+
+file('thinking-in-spring').eachDir { dir ->
+    include dir.name
+    project(":${dir.name}").projectDir = dir
+}
 

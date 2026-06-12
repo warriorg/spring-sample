@@ -1,14 +1,13 @@
 package dev.warrior.xy.domain;
 
+import java.io.Serializable;
+import java.util.Date;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
 
 @MappedSuperclass
 @Data
@@ -22,6 +21,7 @@ public class BaseEntity implements Serializable {
     @Column(updatable = false)
     @CreationTimestamp
     private Date createTime;
+
     @UpdateTimestamp
     private Date updateTime;
 }

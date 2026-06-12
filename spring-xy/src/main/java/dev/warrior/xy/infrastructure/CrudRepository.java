@@ -4,7 +4,6 @@ import java.util.Optional;
 
 public interface CrudRepository<T, ID> {
 
-
     /**
      * Retrieves an entity by its id.
      *
@@ -67,7 +66,6 @@ public interface CrudRepository<T, ID> {
      * @since 2.5
      */
     void deleteAllById(Iterable<? extends ID> ids);
-
 
     /***
      * 保存

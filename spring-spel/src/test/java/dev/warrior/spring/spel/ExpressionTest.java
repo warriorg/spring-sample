@@ -34,9 +34,9 @@ public class ExpressionTest {
     @DisplayName("模版测试")
     public void giveTemplate_whenCompute_thenValue() {
         ExpressionParser parser = new SpelExpressionParser();
-        String randomPhrase = parser.parseExpression("random number is #{T(java.lang.Math).random()}",
-                        new TemplateParserContext()).getValue(String.class);
+        String randomPhrase = parser.parseExpression(
+                        "random number is #{T(java.lang.Math).random()}", new TemplateParserContext())
+                .getValue(String.class);
         System.out.println(randomPhrase);
     }
-
 }

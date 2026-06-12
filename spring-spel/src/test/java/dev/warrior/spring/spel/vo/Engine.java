@@ -8,6 +8,7 @@ public class Engine {
     private int capacity;
     private int horsePower;
     private int numberOfCylinders;
+
     public int getCapacity() {
         return capacity;
     }
@@ -31,7 +32,4 @@ public class Engine {
     public void setNumberOfCylinders(int numberOfCylinders) {
         this.numberOfCylinders = numberOfCylinders;
     }
-
-
-
 }

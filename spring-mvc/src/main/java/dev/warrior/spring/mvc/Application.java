@@ -1,7 +1,8 @@
 package dev.warrior.spring.mvc;
 
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
 import dev.warrior.spring.mvc.controller.PerformanceInteceptor;
+import java.util.TimeZone;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -10,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -22,16 +21,16 @@ public class Application implements WebMvcConfigurer {
         SpringApplication.run(Application.class, args);
     }
 
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new PerformanceInteceptor())
-                .addPathPatterns("/coffee/**").addPathPatterns("/order/**");
+                .addPathPatterns("/coffee/**")
+                .addPathPatterns("/order/**");
     }
 
     @Bean
-    public Hibernate5Module hibernate5Module() {
-        return new Hibernate5Module();
+    public Hibernate6Module hibernate6Module() {
+        return new Hibernate6Module();
     }
 
     @Bean

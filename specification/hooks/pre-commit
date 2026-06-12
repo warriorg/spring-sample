@@ -1,0 +1,27 @@
+#!/bin/sh
+# From gist at https://gist.github.com/chadmaughan/5889802
+
+echo '[git hook] executing gradle spotlessCheck before commit'
+
+ZERO=0;
+
+# stash any unstaged changes
+git stash -q --keep-index
+
+# run the spotlessCheck with the gradle wrapper
+./gradlew spotlessCheck --daemon
+RESULT=$?
+
+if [ $RESULT -eq $ZERO ];
+then
+  ./gradlew pmdMain --daemon
+  RESULT=$?
+fi
+
+
+
+# unstash the unstashed changes
+git stash pop -q
+
+# return the './gradlew spotlessCheck' exit code
+exit $RESULT

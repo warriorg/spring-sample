@@ -1,7 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter")
-    implementation 'org.joda:joda-money'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+    implementation 'org.joda:joda-money:2.0.0'
     runtimeOnly("com.h2database:h2")
 }

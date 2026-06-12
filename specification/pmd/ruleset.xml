@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Rules"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+    <description>
+        java rule
+    </description>
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="BeanMembersShouldSerialize"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
+        <exclude name="AvoidDuplicateLiterals"/>
+        <exclude name="AvoidLiteralsInIfCondition"/>
+        <exclude name="UseLocaleWithCaseConversions"/>
+        <exclude name="AvoidFieldNameMatchingTypeName"/>
+        <exclude name="AvoidFieldNameMatchingMethodName"/>
+        <exclude name="CloseResource" />
+    </rule>
+    <rule ref="category/java/bestpractices.xml">
+        <exclude name="UseVarargs"/>
+        <exclude name="AvoidReassigningParameters"/>
+    </rule>
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="AtLeastOneConstructor"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
+        <exclude name="UselessParentheses"/>
+        <exclude name="ShortVariable"/>
+        <exclude name="LongVariable"/>
+        <exclude name="OnlyOneReturn"/>
+        <exclude name="ShortMethodName"/>
+        <exclude name="ShortClassName"/>
+        <exclude name="ClassNamingConventions"/>
+        <exclude name="FieldNamingConventions"/>
+        <exclude name="ConfusingTernary"/>
+        <exclude name="UnnecessaryLocalBeforeReturn"/>
+        <exclude name="AvoidFinalLocalVariable"/>
+        <exclude name="UnnecessaryFullyQualifiedName" />
+        <exclude name="UseDiamondOperator" />
+        <exclude name="CommentDefaultAccessModifier" />
+    </rule>
+
+    <rule ref="category/java/bestpractices.xml/GuardLogStatement">
+        <properties>
+            <property name="logLevels" value="trace,debug,info" />
+            <property name="guardsMethods" value="isTraceEnabled,isDebugEnabled,isInfoEnabled" />
+        </properties>
+    </rule>
+
+    <rule ref="category/java/security.xml"/>
+    <rule ref="category/java/performance.xml">
+        <exclude name="ConsecutiveLiteralAppends"/>
+        <exclude name="ConsecutiveAppendsShouldReuse"/>
+        <exclude name="AvoidInstantiatingObjectsInLoops"/>
+    </rule>
+    <rule ref="category/java/documentation.xml">
+        <exclude name="CommentSize"/>
+        <exclude name="UncommentedEmptyConstructor"/>
+        <exclude name="UncommentedEmptyMethodBody"/>
+    </rule>
+
+</ruleset>

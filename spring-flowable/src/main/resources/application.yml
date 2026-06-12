@@ -1,0 +1,23 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:flowable
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  mvc:
+    servlet:
+      path: /api
+
+
+server:
+  servlet:
+    context-path: /flowable
+
+logging:
+  level:
+    org.flowable: DEBUG

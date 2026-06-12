@@ -1,6 +1,5 @@
 package me.warriorg.spring.mongo;
 
-
 import lombok.extern.slf4j.Slf4j;
 import me.warriorg.spring.mongo.model.Movie;
 import me.warriorg.spring.mongo.repository.MovieRepository;
@@ -18,7 +17,6 @@ public class ElasticsearchApplication {
     public static void main(String[] args) {
         SpringApplication.run(ElasticsearchApplication.class);
     }
-
 
     @Bean
     public CommandLineRunner demo(MovieRepository repository) {

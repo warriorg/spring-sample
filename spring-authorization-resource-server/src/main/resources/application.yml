@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: spring-authorization-resource-server
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+
+

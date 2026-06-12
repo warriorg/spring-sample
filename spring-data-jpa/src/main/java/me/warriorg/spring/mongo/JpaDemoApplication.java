@@ -1,6 +1,10 @@
 package me.warriorg.spring.mongo;
 
-
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import me.warriorg.spring.mongo.model.Coffee;
 import me.warriorg.spring.mongo.model.CoffeeOrder;
@@ -20,12 +24,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 
-import javax.transaction.Transactional;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * @author warrior
  */
@@ -38,6 +36,7 @@ public class JpaDemoApplication implements ApplicationRunner {
 
     @Autowired
     private CoffeeRepository coffeeRepository;
+
     @Autowired
     private CoffeeOrderRepository orderRepository;
 
@@ -49,13 +48,15 @@ public class JpaDemoApplication implements ApplicationRunner {
     }
 
     private void initOrders() {
-        Coffee latte = Coffee.builder().name("latte")
+        Coffee latte = Coffee.builder()
+                .name("latte")
                 .price(Money.of(CurrencyUnit.of("CNY"), 30.0))
                 .build();
         coffeeRepository.save(latte);
         log.info("Coffee: {}", latte);
 
-        Coffee espresso = Coffee.builder().name("espresso")
+        Coffee espresso = Coffee.builder()
+                .name("espresso")
                 .price(Money.of(CurrencyUnit.of("CNY"), 20.0))
                 .build();
         coffeeRepository.save(espresso);
@@ -79,9 +80,7 @@ public class JpaDemoApplication implements ApplicationRunner {
     }
 
     private void findOrders() {
-        coffeeRepository
-                .findAll(Sort.by(Sort.Direction.DESC, "id"))
-                .forEach(c -> log.info("Loading {}", c));
+        coffeeRepository.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(c -> log.info("Loading {}", c));
 
         List<CoffeeOrder> list = orderRepository.findTop3ByOrderByUpdateTimeDescIdAsc();
         log.info("findTop3ByOrderByUpdateTimeDescIdAsc: {}", getJoinedOrderId(list));
@@ -100,10 +99,8 @@ public class JpaDemoApplication implements ApplicationRunner {
     }
 
     private String getJoinedOrderId(List<CoffeeOrder> list) {
-        return list.stream().map(o -> o.getId().toString())
-                .collect(Collectors.joining(","));
+        return list.stream().map(o -> o.getId().toString()).collect(Collectors.joining(","));
     }
-
 
     @Bean
     public CommandLineRunner demo(MovieRepository repository) {

@@ -1,12 +1,12 @@
 package me.warriorg.spring.mongo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author warrior
@@ -14,13 +14,16 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "t_movies")
-@JsonIgnoreProperties(ignoreUnknown = true, value = {"hibernateLazyInitializer", "handler", "fieldHandler"})
+@JsonIgnoreProperties(
+        ignoreUnknown = true,
+        value = {"hibernateLazyInitializer", "handler", "fieldHandler"})
 public class Movie {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
+
     private String title;
     private long year;
 }

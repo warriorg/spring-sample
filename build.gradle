@@ -1,69 +1,101 @@
 plugins {
-    id 'org.springframework.boot' version '2.7.3'
-    id 'io.spring.dependency-management' version '1.1.2'
+    id 'org.springframework.boot' version '3.5.15'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.graalvm.buildtools.native' version '0.10.6'
+    id "com.diffplug.spotless" version "8.6.0"
+    id 'java'
 }
 
-subprojects {
-
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'io.spring.dependency-management'
+allprojects {
 
     repositories {
         mavenLocal()
-        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
     }
 
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    compileJava.options.encoding = 'UTF-8'
+    group 'dev.warriorg'
+    version '0.0.1'
+
+    if (it.name == "platform") {
+        return;
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'pmd'
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.diffplug.spotless'
+    apply plugin: "io.spring.dependency-management"
 
     ext {
-
     }
 
     dependencies {
-        implementation "org.projectlombok:lombok"
-        annotationProcessor "org.projectlombok:lombok"
+        api platform(project(':platform'))
+        annotationProcessor platform(project(':platform'))
+        testAnnotationProcessor platform(project(':platform'))
 
-        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
 
-        constraints {
+        implementation 'org.mapstruct:mapstruct'
+        annotationProcessor 'org.mapstruct:mapstruct-processor'
 
-            implementation 'org.projectlombok:lombok:1.18.24'
-            annotationProcessor 'org.projectlombok:lombok:1.18.24'
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-            implementation 'org.mapstruct:mapstruct:1.5.2.Final'
-            annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor("org.projectlombok:lombok")
+        testAnnotationProcessor 'org.mapstruct:mapstruct-processor'
 
-            implementation("org.springframework.boot:spring-boot-starter-web:2.6.1")
-
-            implementation 'org.mybatis.spring.boot:mybatis-spring-boot:2.2.0'
-            implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0"
-
-            implementation 'org.joda:joda-money:1.0.1'
-            implementation 'org.jadira.usertype:usertype.core:6.0.1.GA'
-
-            implementation "de.codecentric:spring-boot-admin-starter-server:2.5.1"
-            implementation "de.codecentric:spring-boot-admin-starter-client:2.5.1"
-
-
-            testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-            testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
-            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
-        }
+        implementation 'org.springframework.boot:spring-boot-starter'
     }
 
     clean{
         delete "bin", "out", ".settings", ".classpath", ".project"
     }
 
-    test {
+    tasks.named('test') {
         useJUnitPlatform()
     }
-}
 
-tasks.withType(Wrapper) {
-    enabled = false
+
+
+    pmd {
+        consoleOutput = true
+        rulesMinimumPriority = 5
+        ruleSetFiles = files(rootProject.rootDir.getPath() + '/specification/pmd/ruleset.xml')
+        ruleSets = []
+    }
+
+    spotless {
+        java {
+            removeUnusedImports()
+            trimTrailingWhitespace()
+            leadingTabsToSpaces(4)
+
+            palantirJavaFormat()
+            formatAnnotations()
+        }
+    }
+
+    checkstyle {
+        toolVersion = "10.12.4"
+        config = rootProject.resources.text.fromFile("${rootProject.rootDir.getPath()}/specification/style/checkstyle.xml")
+    }
+
 }

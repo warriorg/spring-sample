@@ -1,5 +1,7 @@
 package com.warriorg.spring.datasource;
 
+import jakarta.annotation.Resource;
+import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,18 +11,15 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
-@SpringBootApplication(exclude = {
-        DataSourceAutoConfiguration.class,
-        DataSourceTransactionManagerAutoConfiguration.class,
-        JdbcTemplateAutoConfiguration.class
-})
+@SpringBootApplication(
+        exclude = {
+            DataSourceAutoConfiguration.class,
+            DataSourceTransactionManagerAutoConfiguration.class,
+            JdbcTemplateAutoConfiguration.class
+        })
 @Slf4j
 public class MultiDataSourceApplication {
 
@@ -30,7 +29,7 @@ public class MultiDataSourceApplication {
 
     @Bean
     @ConfigurationProperties("foo.datasource")
-    public DataSourceProperties fooDataSourceProperties () {
+    public DataSourceProperties fooDataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -49,7 +48,7 @@ public class MultiDataSourceApplication {
 
     @Bean
     @ConfigurationProperties("bar.datasource")
-    public DataSourceProperties barDataSourceProperties () {
+    public DataSourceProperties barDataSourceProperties() {
         return new DataSourceProperties();
     }
 
@@ -65,5 +64,4 @@ public class MultiDataSourceApplication {
     public PlatformTransactionManager barTransactionManager(DataSource barDataSource) {
         return new DataSourceTransactionManager(barDataSource);
     }
-
 }

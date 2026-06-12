@@ -1,6 +1,12 @@
 package me.warriorg.spring.mongo;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import lombok.extern.slf4j.Slf4j;
 import me.warriorg.spring.mongo.converter.MoneyReadConverter;
 import me.warriorg.spring.mongo.converter.MoneyWriteConverter;
@@ -21,15 +27,6 @@ import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.core.query.Update;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
-
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
-
-
 /**
  * @author warrior
  */
@@ -42,11 +39,9 @@ public class Application implements ApplicationRunner {
 
     private CountDownLatch cdl = new CountDownLatch(2);
 
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class);
     }
-
 
     @Bean
     public CommandLineRunner demo(MovieRepository repository) {
@@ -64,14 +59,12 @@ public class Application implements ApplicationRunner {
 
     @Bean
     public MongoCustomConversions mongoCustomConversions() {
-        return new MongoCustomConversions(
-                Arrays.asList(new MoneyReadConverter(),
-                        new MoneyWriteConverter()));
+        return new MongoCustomConversions(Arrays.asList(new MoneyReadConverter(), new MoneyWriteConverter()));
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-//		startFromInsertion(() -> log.info("Runnable"));
+        //		startFromInsertion(() -> log.info("Runnable"));
         startFromInsertion(() -> {
             log.info("Runnable");
             decreaseHighPrice();
@@ -79,14 +72,15 @@ public class Application implements ApplicationRunner {
 
         log.info("after starting");
 
-//		decreaseHighPrice();
+        //		decreaseHighPrice();
 
         cdl.await();
     }
 
     private void startFromInsertion(Runnable runnable) {
-        mongoTemplate.insertAll(initCoffee())
-                .publishOn(Schedulers.elastic())
+        mongoTemplate
+                .insertAll(initCoffee())
+                .publishOn(Schedulers.boundedElastic())
                 .doOnNext(c -> log.info("Next: {}", c))
                 .doOnComplete(runnable)
                 .doFinally(s -> {
@@ -98,9 +92,11 @@ public class Application implements ApplicationRunner {
     }
 
     private void decreaseHighPrice() {
-        mongoTemplate.updateMulti(query(where("price").gte(3000L)),
-                new Update().inc("price", -500L)
-                        .currentDate("updateTime"), Coffee.class)
+        mongoTemplate
+                .updateMulti(
+                        query(where("price").gte(3000L)),
+                        new Update().inc("price", -500L).currentDate("updateTime"),
+                        Coffee.class)
                 .doFinally(s -> {
                     cdl.countDown();
                     log.info("Finnally 2, {}", s);

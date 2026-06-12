@@ -13,6 +13,7 @@ public class Movie {
 
     @Id
     private String id;
+
     private String title;
     private long year;
 }

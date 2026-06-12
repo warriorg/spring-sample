@@ -6,5 +6,4 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 /**
  * @author warrior
  */
-public interface MovieRepository extends ElasticsearchRepository<Movie, String> {
-}
+public interface MovieRepository extends ElasticsearchRepository<Movie, String> {}

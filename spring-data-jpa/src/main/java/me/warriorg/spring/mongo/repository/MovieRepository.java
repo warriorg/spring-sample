@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * @author warrior
  */
-public interface MovieRepository extends JpaRepository<Movie, String> {
-}
+public interface MovieRepository extends JpaRepository<Movie, String> {}

@@ -1,23 +1,18 @@
 package dev.warriorg.nacos.resource;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.listener.NamingEvent;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import java.net.InetAddress;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @RequestMapping("discovery")
@@ -34,8 +29,8 @@ public class DiscoveryController {
     @PostConstruct
     private void init() throws NacosException {
         namingService.subscribe("spring-nacos", event -> {
-            System.out.println(((NamingEvent)event).getServiceName());
-            System.out.println(((NamingEvent)event).getInstances());
+            System.out.println(((NamingEvent) event).getServiceName());
+            System.out.println(((NamingEvent) event).getInstances());
         });
     }
 
@@ -50,7 +45,8 @@ public class DiscoveryController {
     public List<Instance> register() throws Exception {
         System.out.println(InetAddress.getLocalHost().getHostAddress());
 
-        namingService.registerInstance(applicationName, InetAddress.getLocalHost().getHostAddress(), serverPort);
+        namingService.registerInstance(
+                applicationName, InetAddress.getLocalHost().getHostAddress(), serverPort);
         return namingService.getAllInstances(applicationName);
     }
 }

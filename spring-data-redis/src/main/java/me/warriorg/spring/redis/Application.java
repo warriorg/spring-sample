@@ -1,6 +1,11 @@
 package me.warriorg.spring.redis;
 
 import io.lettuce.core.ReadFrom;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
 import lombok.extern.slf4j.Slf4j;
 import me.warriorg.spring.redis.converter.BytesToMoneyConverter;
 import me.warriorg.spring.redis.converter.MoneyToBytesConverter;
@@ -27,12 +32,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CountDownLatch;
-
 @Slf4j
 @EnableTransactionManagement
 @SpringBootApplication
@@ -46,6 +45,7 @@ public class Application implements ApplicationRunner {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Autowired
     private ReactiveStringRedisTemplate redisTemplate;
 
@@ -58,21 +58,15 @@ public class Application implements ApplicationRunner {
         return builder -> builder.readFrom(ReadFrom.MASTER_PREFERRED);
     }
 
-
-
-
     @Bean
     public RedisCustomConversions redisCustomConversions() {
-        return new RedisCustomConversions(
-                Arrays.asList(new MoneyToBytesConverter(), new BytesToMoneyConverter()));
+        return new RedisCustomConversions(Arrays.asList(new MoneyToBytesConverter(), new BytesToMoneyConverter()));
     }
 
     @Bean
     ReactiveStringRedisTemplate reactiveRedisTemplate(ReactiveRedisConnectionFactory factory) {
         return new ReactiveStringRedisTemplate(factory);
     }
-
-
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -94,14 +88,11 @@ public class Application implements ApplicationRunner {
         ReactiveHashOperations<String, String, String> hashOps = redisTemplate.opsForHash();
         CountDownLatch cdl = new CountDownLatch(1);
 
-        List<Coffee> list = jdbcTemplate.query(
-                "select * from t_coffee", (rs, i) ->
-                        Coffee.builder()
-                                .id(rs.getLong("id"))
-                                .name(rs.getString("name"))
-                                .price(Money.of(CurrencyUnit.USD, rs.getLong("price")))
-                                .build()
-        );
+        List<Coffee> list = jdbcTemplate.query("select * from t_coffee", (rs, i) -> Coffee.builder()
+                .id(rs.getLong("id"))
+                .name(rs.getString("name"))
+                .price(Money.of(CurrencyUnit.USD, rs.getLong("price")))
+                .build());
 
         Flux.fromIterable(list)
                 .publishOn(Schedulers.single())
@@ -117,7 +108,8 @@ public class Application implements ApplicationRunner {
                     log.error("exception {}", e.getMessage());
                     return Mono.just(false);
                 })
-                .subscribe(b -> log.info("Boolean: {}", b),
+                .subscribe(
+                        b -> log.info("Boolean: {}", b),
                         e -> log.error("Exception {}", e.getMessage()),
                         () -> cdl.countDown());
         log.info("Waiting");

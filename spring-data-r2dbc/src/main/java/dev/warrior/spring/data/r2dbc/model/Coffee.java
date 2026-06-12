@@ -1,5 +1,6 @@
 package dev.warrior.spring.data.r2dbc.model;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,8 +8,6 @@ import lombok.NoArgsConstructor;
 import org.joda.money.Money;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.Date;
 
 @Data
 @Builder
@@ -18,6 +17,7 @@ import java.util.Date;
 public class Coffee {
     @Id
     private Long id;
+
     private String name;
     private Money price;
     private Date createTime;
