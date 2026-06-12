@@ -1,27 +1,23 @@
 plugins {
-    id 'org.springframework.boot' version '3.4.2'
+    id 'org.springframework.boot' version '3.5.15'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'org.graalvm.buildtools.native' version '0.10.5'
-    id "com.diffplug.spotless" version "7.0.4"
+    id 'org.graalvm.buildtools.native' version '0.10.6'
+    id "com.diffplug.spotless" version "8.6.0"
+    id 'java'
 }
 
-subprojects {
-
-    if (it.name == "platform") {
-        return;
-    }
-
-    apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'pmd'
-    apply plugin: 'checkstyle'
-    apply plugin: 'com.diffplug.spotless'
+allprojects {
 
     repositories {
         mavenLocal()
-        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
         mavenCentral()
+        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
     }
 
     java {
@@ -30,37 +26,53 @@ subprojects {
         }
     }
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    compileJava.options.encoding = 'UTF-8'
+    group 'dev.warriorg'
+    version '0.0.1'
+
+    if (it.name == "platform") {
+        return;
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'pmd'
+    apply plugin: 'checkstyle'
+    apply plugin: 'com.diffplug.spotless'
+    apply plugin: "io.spring.dependency-management"
 
     ext {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter'
+        api platform(project(':platform'))
+        annotationProcessor platform(project(':platform'))
+        testAnnotationProcessor platform(project(':platform'))
+
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
-        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        implementation 'org.mapstruct:mapstruct'
+        annotationProcessor 'org.mapstruct:mapstruct-processor'
 
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-        api platform(project(':platform'))
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor("org.projectlombok:lombok")
+        testAnnotationProcessor 'org.mapstruct:mapstruct-processor'
 
-        constraints {
-            implementation 'com.mysql:mysql-connector-j:9.2.0'
-        }
+        implementation 'org.springframework.boot:spring-boot-starter'
     }
 
     clean{
         delete "bin", "out", ".settings", ".classpath", ".project"
     }
 
-    test {
+    tasks.named('test') {
         useJUnitPlatform()
     }
+
 
 
     pmd {
@@ -86,8 +98,4 @@ subprojects {
         config = rootProject.resources.text.fromFile("${rootProject.rootDir.getPath()}/specification/style/checkstyle.xml")
     }
 
-}
-
-tasks.withType(Wrapper) {
-    enabled = false
 }

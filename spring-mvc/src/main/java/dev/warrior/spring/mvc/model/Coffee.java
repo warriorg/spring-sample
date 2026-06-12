@@ -1,15 +1,14 @@
 package dev.warrior.spring.mvc.model;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
 import org.joda.money.Money;
 
 @Entity
@@ -23,8 +22,5 @@ import org.joda.money.Money;
 public class Coffee extends BaseEntity implements Serializable {
     private String name;
 
-    @Type(
-            type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyMinorAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
     private Money price;
 }

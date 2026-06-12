@@ -80,7 +80,7 @@ public class Application implements ApplicationRunner {
     private void startFromInsertion(Runnable runnable) {
         mongoTemplate
                 .insertAll(initCoffee())
-                .publishOn(Schedulers.elastic())
+                .publishOn(Schedulers.boundedElastic())
                 .doOnNext(c -> log.info("Next: {}", c))
                 .doOnComplete(runnable)
                 .doFinally(s -> {

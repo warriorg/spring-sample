@@ -8,7 +8,8 @@ javaPlatform {
 
 dependencies {
     api platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
-    api platform("org.springframework.ai:spring-ai-bom:1.0.0")
+    api platform("org.springdoc:springdoc-openapi-bom:2.8.13")
+    api platform("org.springframework.ai:spring-ai-bom:1.1.7")
 
     constraints {
         api("com.google.guava:guava:30.1-jre")
@@ -19,5 +20,12 @@ dependencies {
 
         api('org.joda:joda-money:2.0.0')
         api("org.jadira.usertype:usertype.core:7.0.0.CR1")
+
+        api 'com.mysql:mysql-connector-j:9.2.0'
+
+        api 'org.wiremock.integrations:wiremock-spring-boot:3.9.0'
+
+        api 'org.mapstruct:mapstruct:1.5.3.Final'
+        api 'org.mapstruct:mapstruct-processor:1.5.3.Final'
     }
 }

@@ -5,7 +5,7 @@ import dev.warrior.spring.mvc.controller.request.NewCoffeeRequest;
 import dev.warrior.spring.mvc.model.Coffee;
 import dev.warrior.spring.mvc.service.CoffeeService;
 import java.util.List;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

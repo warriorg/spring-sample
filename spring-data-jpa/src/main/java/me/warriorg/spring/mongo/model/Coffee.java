@@ -2,15 +2,15 @@ package me.warriorg.spring.mongo.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.joda.money.Money;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "t_coffee")
@@ -29,9 +29,6 @@ public class Coffee implements Serializable {
     private String name;
 
     @Column
-    @Type(
-            type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmount",
-            parameters = {@org.hibernate.annotations.Parameter(name = "currencyCode", value = "CNY")})
     private Money price;
 
     @Column(updatable = false)

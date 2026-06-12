@@ -1,6 +1,6 @@
 package dev.warrior.spring.mvc;
 
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate6.Hibernate6Module;
 import dev.warrior.spring.mvc.controller.PerformanceInteceptor;
 import java.util.TimeZone;
 import org.springframework.boot.SpringApplication;
@@ -29,8 +29,8 @@ public class Application implements WebMvcConfigurer {
     }
 
     @Bean
-    public Hibernate5Module hibernate5Module() {
-        return new Hibernate5Module();
+    public Hibernate6Module hibernate6Module() {
+        return new Hibernate6Module();
     }
 
     @Bean

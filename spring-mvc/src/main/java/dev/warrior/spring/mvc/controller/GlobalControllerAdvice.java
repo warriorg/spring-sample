@@ -2,7 +2,7 @@ package dev.warrior.spring.mvc.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.validation.ValidationException;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

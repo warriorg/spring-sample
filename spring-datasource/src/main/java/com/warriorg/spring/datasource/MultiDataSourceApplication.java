@@ -1,6 +1,6 @@
 package com.warriorg.spring.datasource;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import javax.sql.DataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
